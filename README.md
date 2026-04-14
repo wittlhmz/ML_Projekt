@@ -26,41 +26,50 @@ Wie erwähnt gibt es 3 verschiedene Schwierigkeitsstufen, mit jeder Stufe erhöh
 Da es so keine passende Aufgabe gab, mit der ich die Untersuchung starten könnte, habe ich mir ein eigenes Spiel überlegt und in Unity programmiert.
 
 Das Prinzip des Spiels ist recht einfach:
-Der Agent in der Mitte des Bildschirms verschießt Blitze und muss mit den Blitzen insgesamt 50 Fässer zerstören. Das Ziel des Spiels ist es, die Fässer so schnell wie möglich zu zerstören.
+Der Agent in der Mitte des Bildschirms verschießt Blitze und muss mit den Blitzen insgesamt 50 (im höchsten Schwierigkeitsgrad 75) Fässer zerstören. Das Ziel des Spiels ist es, die Fässer so schnell wie möglich zu zerstören.
 Dabei verursachen Blitze bei Fässern mit übereinstimmender Farbe mehr Schaden.
 Mit steigendem Schwierigkeitsgrad kann der Agent seine Blitze durch Fähigkeitspunkte und mit kaufbaren Items verstärken.
 
-Hier ist einmal eine Beispielszene aus dem Training im härtesten Schwierigkeitsgrad dargestellt.
+Hier ist einmal eine Beispielszene aus dem Training im härtesten Schwierigkeitsgrad dargestellt:
 
 <p align="center">
-  <img src="images/training.gif" width="600"/>
+  <img src="images/training.gif" width="800"/>
 </p>
 
-kleine Beschreibung
+In der Mitte des Bildschirms ist das Spielgeschehen abgebildet, in der der Agent seine Blitze in Richtung der gespawnten Fässer verschießt. Oben links im UI sind die verbleibenden Fässer dargestellt und wie oft der Agent den jeweiligen Blitztyp verstärkt hat.
+Unten links ist das Inventar mit den Items abgebildet, die die Blitze des Agenten jeweils verstärken. 
+Oben rechts ist die verstrichene Zeit zu sehen, welche der wichtigste Indikator für die Leistungsbewertung der Agenten darstellt: Je schneller der Agent ist, desto besser ist er. Außerdem befinden sich oben rechts einige wichtige Eckdaten, wie z.B. die Trefferrate, die zur späteren Analyse verwendet wurde.
+Unten rechts im Bild sind Verstärkungen der Fässer zu sehen, welche im Laufe des Spiels zufällig vergeben werden. Diese Buffs sorgen dafür, dass die Fässer mehr z.B. mehr Lebenspunkte bekommen oder dass die Blitze weniger Schaden machen. 
 
 ---
 
 ## Ergebnisse
 
-Die Ergebnisse zeigen deutlich, dass Agenten mit dichter Belohnungsfunktion signifikant bessere Lernergebnisse erzielen als Agenten mit spärlicher Belohnung.
+Das Training lief über ca. 12 Wochen, einiges an Trainingszeit wurde aber auch für das Balancing des Spiels und zur Kalibrierung der Belohnungsfunktion verwendet.
+Es wurden pro Schwierigkeitsstufe 6 Agenten trainiert, jeweils 3 für sparse und dense Belohnungsfunktionen; insgesamt kommt man dann also auf 18 verschiedene Agenten, die im Laufe des Experiments trainiert wurden.
+Da die Fässer so schnell wie möglich zerstört werden sollen, ist die Dauer einer Spielrunde von größter Bedeutung.
 
-Insbesondere mit steigender Aufgabenkomplexität verstärkt sich dieser Effekt:
-
-- Agenten mit Sparse Rewards zeigen eine deutlich geringere Sample Efficiency
-- Lernfortschritte sind langsamer und instabiler
-- In komplexeren Umgebungen gelingt das Lernen teilweise nur eingeschränkt
-
-Im Gegensatz dazu profitieren Agenten mit Dense Rewards von kontinuierlichem Feedback, was zu stabileren und effizienteren Lernprozessen führt.
-
----
-
-## Visualisierung der Ergebnisse
+Im leichten Schwierigkeitsgrad liegen die Episodenlängen aller Agenten zwischen 49 ± 2 Sekunden. Hinsichtlich der absoluten Performance gibt es damit keinen großen Unterschied. Auffällig ist jedoch die Sample Efficiency, also wie schnell ein Agent lernt.
+Wie in der unteren Abbildung zu sehen ist, fällt die Lernkurve der dicht belohnten Agenten steil ab, während die Lernkurve der sparsamen Agenten deutlich langsamer verläuft, nahezu zehnmal länger.
 
 <p align="center">
-  <img src="images/graph1.png" width="500"/>
-  <img src="images/graph2.png" width="500"/>
-  <img src="images/graph3.png" width="500"/>
+  <img src="images/easy.png" width="800"/>
 </p>
+
+Im mittleren Schwierigkeitsgrad zeigt sich ein sichtbarer Unterschied zwischen den Ansätzen. Agenten mit häufiger Belohnung lösen die Aufgabe im Schnitt deutlich schneller und brauchen nur etwa 60 % der Zeit im Vergleich zu Agenten mit seltener Belohnung. Außerdem sind ihre Ergebnisse deutlich stabiler, während die Leistung der anderen Agenten stärker schwankt.
+
+<p align="center">
+  <img src="images/mid.png" width="800"/>
+</p>
+
+Im hohen Schwierigkeitsgrad wird der Unterschied noch deutlicher. Agenten mit häufiger Belohnung sind nicht nur deutlich schneller, sondern lernen auch stabil und zeigen klare Fortschritte. Agenten mit seltener Belohnung hingegen brauchen ein Vielfaches an Zeit und eine Lernkurve ist kaum erkennbar.
+Zusätzlich kommen selten belohnte Agenten mit dem Itemsystem nicht zurecht und treffen deutlich ungenauer, während die häufig belohnten Agenten auch hier klar besser abschneiden.
+
+<p align="center">   
+  <img src="images/hard.png" width="800"/>
+</p>
+
+Für eine umfassende Analyse, kann auch gerne in meiner Bachelorarbeit (main.pdf in diesem Projekt) nachgeschaut werden. In der Arbeit werden noch weitere Faktoren genannt, nicht nur die reine Dauer einer Spielrunde.
 
 ---
 
